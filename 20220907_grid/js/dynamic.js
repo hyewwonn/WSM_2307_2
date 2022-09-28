@@ -45,3 +45,40 @@ const setCalendar = (year, month) => {
     firstDateDiv.style.gridColumnStart = firstDay + 1;
 }
 setCalendar(year, month);
+//이전 달 달력 보이자
+const prevMonth = () => {
+    if(month<=1){
+        year--;
+        month = 12;
+    }
+    else{
+        month--; 
+    }
+
+    setCalendar(year, month);
+}
+
+//다음 달 달력 보이자
+const nextMonth = () => {
+    if(month>=12){
+        year++;
+        month = 1;
+    }
+    else{
+        month++; 
+    }
+    setCalendar(year,month);
+}
+
+const initButton = () => {
+    // HTML -> js
+    // const prev_btn = document.getElementById("prev-btn")
+    // const next_btn = document.getElementById("next_btn")
+
+    // js event 달자
+    // prev_btn.addEventListener("click", prevMonth);
+    // next_btn.addEventListener("click", nextMonth);
+    prev_btn.onclick = prevMonth;
+    next_btn.onclick = nextMonth;
+}
+initButton();
