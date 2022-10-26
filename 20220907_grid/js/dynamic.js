@@ -93,7 +93,7 @@ const handler = (event) => {
     url += `&ATPT_OFCDC_SC_CODE=${ATPT_OFCDC_SC_CODE}`;
     url += `&SD_SCHUL_CODE=${SD_SCHUL_CODE}`;
     url += `&MLSV_YMD=${MLSV_YMD}`;
-    console.log(url);
+    // console.log(url);
     getMenuByAPI(url);
 }
 //AJAX로 url 호출하자(Asynchronous JavaScript And XML)
@@ -105,8 +105,9 @@ const getMenuByAPI = (url) => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             //success
-            console.log("성공");
-            console.log(xhr.response);
+            // console.log("성공");
+            // console.log(xhr.response);
+            showMenu(xhr.response);
         } else {
             //fail
         }
@@ -118,10 +119,36 @@ const getMenuByAPI = (url) => {
     //요청 전송하자
     xhr.send();
 }
-//응답오면, #breakfast, #lunch, #dinner에 출력하자
+const showMenu = (jsonString) => {
+    // console.log(jsonString);
+    //jsonString -> json
+    let json = JSON.parse(jsonString);  //JSON.stringify(): json -> String
+    // console.log(json);
+    //json -> 조식, 중식, 석식
+    let breakfastMenu = "없음";
+    let lunchMenu = "없음";
+    let dinnerMenu = "없음";
+    try {
+        breakfastMenu = json["mealServiceDietInfo"][1]["row"][0]["DDISH_NM"];
+    } catch {
+    }
+    try {
+        lunchMenu = json["mealServiceDietInfo"][1]["row"][1]["DDISH_NM"];
+    } catch {
+    }
+    try {
+        dinnerMenu = json["mealServiceDietInfo"][1]["row"][2]["DDISH_NM"];
+    } catch {
+    }
+    //조식, 중식, 석식 -> HTML
+    //응답오면, #breakfast, #lunch, #dinner에 출력하자
+    breakfast.innerHTML = breakfastMenu;
+    lunch.innerHTML = lunchMenu;
+    dinner.innerHTML = dinnerMenu;
+}
 let dateGridContainerDiv = document.getElementsByClassName("date-grid-container")[0];
 let gridItems = dateGridContainerDiv.getElementsByClassName("grid-item");
 for (let gridItem of gridItems) {
     // console.log(gridItem);
-    gridItem.onclick = handler;
+    gridItem.onmouseover = handler; //mouseover일 때, 이벤트 처리하자
 }
