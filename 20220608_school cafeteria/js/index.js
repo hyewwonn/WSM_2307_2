@@ -80,4 +80,4 @@ const showTodayMenu = () => {
   //응답오면 표시하자
   fetch(url).then((response) => response.json()).then((json) => console.log(json));
 }
-showTodayMenu();
+showTodayMenu(); 
