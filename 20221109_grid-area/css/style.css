@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .grid-container {
     display: grid;
     grid-template-areas:
@@ -53,4 +54,28 @@ footer {
 
 .footer {
     grid-area: footer;
+=======
+header {
+    border: 1px solid gray;
+}
+
+nav {
+    border: 1px solid gray;
+}
+
+aside {
+    border: 1px solid gray;
+}
+
+main {
+    border: 1px solid gray;
+}
+
+header {
+    border: 1px solid gray;
+}
+
+footer {
+    border: 1px solid gray;
+>>>>>>> 98ec414d52608ae808bf1f2e081bdf282069c784
 }
